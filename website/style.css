@@ -7,13 +7,20 @@ body{
     display: grid;
     grid-auto-rows: minmax(150px, auto);
     /* grid-template-columns:  */
-    height:100vh;
+    height:120vh;
     background: #647bb6;
     color: #f0d43a;
     justify-content: center;
-    grid-gap: 1em;
+    /* grid-gap: 1em; */
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
+}
+header {
+    background-color: #8e9ab8;
+    text-align: center;
+    margin: 3px;
+    border: 1px solid transparent;
+    border-radius: 5px;
 }
 
 .holder{
@@ -22,11 +29,17 @@ body{
 
 .entry{
     background: rgba(49, 117, 255, 0.4);
-    width: 420px;
+    width: 600px;
+    height: 200px;
     margin-top: 10px;
     z-index: 50;
     background:#4c7aec;
+    margin-top: 1em;
 
+}
+#feelings {
+    height: 200px;
+    margin-top: 1px;
 }
 
 #entryHolder{
@@ -67,18 +80,18 @@ input{
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
     border: none;
-    margin-bottom: 5px;
 }
 
 button{
     width: 400px;
-    height: 100px;
+    height: 50px;
     background: #3b4a6b;
     color: #f0d43a;
     font-size: 26px;
     font-family: 'Oswald', sans-serif;
     border: none;
     box-shadow: 2px 4px 5px #444;
+    margin-bottom: 2px;
 }
 h1{
     font-size: 36px;
@@ -88,7 +101,6 @@ textarea{
     background:#8e9ab8;;
     color: #f0d43a;
     font-size: 20px;
-    margin-bottom: 5px;
     font-family: 'Oswald', sans-serif;
 }
 /* Reset style for HTML element on active to have no border*/

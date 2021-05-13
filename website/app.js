@@ -39,18 +39,18 @@ const postReq = async(url = '', data = {}) => {
     }
 }
 
-const getReq = async(url = '') => {
-    const response = await fetch(url, {
-    method: 'GET',
-    credentials: 'same-origin',
-    })
-    try{
-        const getData = await response.json();
-        console.log(getData);
-    }catch(error) {
-        console.log(error);
-    }
-}
+// const getReq = async(url = '') => {
+//     const response = await fetch(url, {
+//     method: 'GET',
+//     credentials: 'same-origin',
+//     })
+//     try{
+//         const getData = await response.json();
+//         console.log(getData);
+//     }catch(error) {
+//         console.log(error);
+//     }
+// }
 // getReq('/');
 
 const getWeatherData = async(url = '') => {
@@ -63,7 +63,7 @@ const getWeatherData = async(url = '') => {
     try{
         const waetherData = await response.json();
         console.log(waetherData.main.temp);
-   let temperature = waetherData.main.temp;
+   let temperature = waetherData?.main?.temp; 
    var date = d.getMonth() + 1 + '.' + d.getDate() + '.' + d.getFullYear();
    var userResponse = feeling.value;
 
@@ -78,25 +78,28 @@ const getWeatherData = async(url = '') => {
     console.log(error);
 }
 }
+const dateToday = document.getElementById('date');
+const content = document.getElementById('content');
+const tempToday = document.getElementById('temp');
+const dateElement = document.createElement('p');
+const tempElement = document.createElement('p');
+const responseElement = document.createElement('p');
 async function getData() {
+    dateElement.innerText = " ";
+    tempElement.innerText = " ";
+    responseElement.innerText = " ";
     const response = await axios.get('http://localhost:3000/getAll');
     let {data} =await response;
-    console.log('response',data)
-for (var item of data){
-  console.log(item)
-    const dateToday = document.getElementById('date');
-    const content = document.getElementById('content');
-    const addElement = document.createElement('h2');
-    const tempToday = document.getElementById('temp');
-    const addElement2 = document.createElement('h2');
-
-    // console.log(addElement2);
-    addElement.innerText = item.date;
-    // addElement2.innerText = item.temp;
-    dateToday.append(addElement);
-    // tempToday.append(addElement2);
-    console.log(dateToday);
-    // console.log(tempToday);
-    console.log(response.data);    
+    console.log(data.length)
+    let item =data[data.length-1];
+    console.log('response',item)
+// for (var item of data){
+//   console.log(item)
+    dateElement.innerText = 'date today: ' + item.date;
+    dateToday.append(dateElement);
+    tempElement.innerText = 'temprature today: ' + item.temperature;
+    tempToday.append(tempElement);
+    responseElement.innerText = 'feelings: ' + item.userResponse;
+    content.append(responseElement);
 }
-}
+// }
