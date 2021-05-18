@@ -1,24 +1,25 @@
 /* Global Variables */
-var apiKey = 'b217d2265dedb691d8948c5003af02c2';
+// var apiKey = 'b217d2265dedb691d8948c5003af02c2';
+var apiKey = 'b217d2265dedb691d8948c5003af02c2&units=imperial';
 const zip = document.getElementById('zip');
 const feeling = document.getElementById('feelings');
 const submitBtn = document.getElementById('generate');
+const dateToday = document.getElementById('date');
+const content = document.getElementById('content');
+const tempToday = document.getElementById('temp');
+const dateElement = document.createElement('p');
+const tempElement = document.createElement('p');
+const responseElement = document.createElement('p');
+
 submitBtn.addEventListener('click', () => {
     if(zip.value === '' && feeling.value === '') {
         alert('please fill up zipcode and feelings!!');
         return;
     }
     console.log(zip.value)
-    getWeatherData(`http://api.openweathermap.org/data/2.5/weather?zip=${zip.value}&APPID=b217d2265dedb691d8948c5003af02c2`);
+    getWeatherData(`http://api.openweathermap.org/data/2.5/weather?zip=${zip.value}&APPID=${apiKey}`);
 
 })
-
-// gSvsmrTRbsOekKLMh0PxI
-// Ri5T9iEbG4XN6JfSrvwzkqI5Lj7AIbb2cKstJowY
-// Create a new date instance dynamically with JS
-// let d = new Date();
-// let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
-
 
 const postReq = async(url = '', data = {}) => {
     console.log(data);
@@ -38,20 +39,6 @@ const postReq = async(url = '', data = {}) => {
         console.log(error);
     }
 }
-
-// const getReq = async(url = '') => {
-//     const response = await fetch(url, {
-//     method: 'GET',
-//     credentials: 'same-origin',
-//     })
-//     try{
-//         const getData = await response.json();
-//         console.log(getData);
-//     }catch(error) {
-//         console.log(error);
-//     }
-// }
-// getReq('/');
 
 const getWeatherData = async(url = '') => {
     const d = new Date();
@@ -78,12 +65,6 @@ const getWeatherData = async(url = '') => {
     console.log(error);
 }
 }
-const dateToday = document.getElementById('date');
-const content = document.getElementById('content');
-const tempToday = document.getElementById('temp');
-const dateElement = document.createElement('p');
-const tempElement = document.createElement('p');
-const responseElement = document.createElement('p');
 async function getData() {
     dateElement.innerText = " ";
     tempElement.innerText = " ";
@@ -91,15 +72,15 @@ async function getData() {
     const response = await axios.get('http://localhost:3000/getAll');
     let {data} =await response;
     console.log(data.length)
-    let item =data[data.length-1];
+    let item = data;
     console.log('response',item)
 // for (var item of data){
 //   console.log(item)
-    dateElement.innerText = 'date today: ' + item.date;
+    dateElement.innerHTML = 'date today: ' + item.date;
     dateToday.append(dateElement);
-    tempElement.innerText = 'temprature today: ' + item.temperature;
+    tempElement.innerHTML = 'temprature today: ' + item.temperature + ' F';
     tempToday.append(tempElement);
-    responseElement.innerText = 'feelings: ' + item.userResponse;
+    responseElement.innerHTML = 'feelings: ' + item.userResponse;
     content.append(responseElement);
 }
 // }

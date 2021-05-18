@@ -20,12 +20,13 @@ app.use(express.static('website'));
 
 
 // Setup Server
-var projectData = []; //database
+var projectData = {}; //database
 app.post('/post', addData)
 
 function addData(req, res) {
     console.log( 'req body',req.body)
-    projectData.push(req.body.data);
+    // projectData.push(req.body.data)
+    projectData= req.body.data;
     res.send(projectData);
     console.log(projectData);
 }
